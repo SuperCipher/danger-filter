@@ -1,0 +1,13 @@
+{
+  "name": "danger-filter",
+  "version": "1.0.0",
+  "description": "Pi package that filters dangerous bash commands and protects sensitive file paths from accidental modification",
+  "keywords": ["pi-package"],
+  "pi": {
+    "extensions": ["./extensions"],
+    "skills": ["./skills"]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  }
+}
