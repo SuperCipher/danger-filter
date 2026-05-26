@@ -1,3 +1,8 @@
+---
+name: danger-filter
+description: Prevents dangerous shell commands and writes to sensitive files
+---
+
 # Danger Filter
 
 This project uses the Danger Filter to prevent dangerous shell commands and block writes to sensitive files.

@@ -125,7 +125,7 @@ function loadConfig(cwd: string): DangerFilterConfig {
 
   if (existsSync(globalConfigPath)) {
     try {
-      globalConfig = JSON.parse(readFileSync(globalConfigPath, "utf-8"));
+      globalConfig = JSON.parse(readFileSync(globalConfigPath, "utf-8")) ?? {};
     } catch (e) {
       console.error(`Warning: Could not parse ${globalConfigPath}:`, e);
     }
@@ -133,7 +133,7 @@ function loadConfig(cwd: string): DangerFilterConfig {
 
   if (existsSync(projectConfigPath)) {
     try {
-      projectConfig = JSON.parse(readFileSync(projectConfigPath, "utf-8"));
+      projectConfig = JSON.parse(readFileSync(projectConfigPath, "utf-8")) ?? {};
     } catch (e) {
       console.error(`Warning: Could not parse ${projectConfigPath}:`, e);
     }
@@ -143,17 +143,17 @@ function loadConfig(cwd: string): DangerFilterConfig {
 }
 
 function deepMerge(
-  base: DangerFilterConfig,
+  base: Partial<DangerFilterConfig>,
   overrides: Partial<DangerFilterConfig>
 ): DangerFilterConfig {
   const result: DangerFilterConfig = {
     ...base,
     commands: {
-      block: [...base.commands.block],
-      warn: [...base.commands.warn],
-      allow: [...base.commands.allow],
+      block: [...(base.commands?.block ?? [])],
+      warn: [...(base.commands?.warn ?? [])],
+      allow: [...(base.commands?.allow ?? [])],
     },
-    protectedPaths: [...base.protectedPaths],
+    protectedPaths: [...(base.protectedPaths ?? [])],
   };
 
   if (overrides.enabled !== undefined) result.enabled = overrides.enabled;
